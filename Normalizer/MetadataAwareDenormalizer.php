@@ -16,6 +16,8 @@ use Symfony\Component\Serializer\Exception\LogicException;
  */
 class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements DenormalizerInterface
 {
+    use GroupValidationTrait;
+    
     /**
      * @var Metadata[]
      */
@@ -98,7 +100,7 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
         $accessor = null;
         foreach ($meta['property'][$propertyName] as $name => $metaValue) {
             switch ($name) {
-                case 'exclude';
+                case 'exclude':
                     // Skip this
                     return;
                 case 'read_only':
@@ -124,13 +126,7 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
 
         // Validate context groups
         if (!empty($context['groups'])) {
-            $included = false;
-            foreach ($context['groups'] as $group) {
-                if (in_array($group, $groups)) {
-                    $included = true;
-                    break;
-                }
-            }
+            $included = $this->includeBasedOnGroup($context, $groups);
         }
 
         if (!$included || $readOnly) {

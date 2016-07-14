@@ -16,6 +16,8 @@ use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
  */
 class MetadataAwareNormalizer extends SerializerAwareNormalizer implements NormalizerInterface
 {
+    use GroupValidationTrait;
+
     /**
      * @var Metadata[]
      */
@@ -105,13 +107,7 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
 
         // Validate context groups
         if (!empty($context['groups'])) {
-            $included = false;
-            foreach ($context['groups'] as $group) {
-                if (in_array($group, $groups)) {
-                    $included = true;
-                    break;
-                }
-            }
+            $included = $this->includeBasedOnGroup($context, $groups);
         }
 
         if (!$included) {
@@ -148,13 +144,7 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
 
         // Validate context groups
         if (!empty($context['groups'])) {
-            $included = false;
-            foreach ($context['groups'] as $group) {
-                if (in_array($group, $groups)) {
-                    $included = true;
-                    break;
-                }
-            }
+            $included = $this->includeBasedOnGroup($context, $groups);
         }
 
         if (!$included) {
