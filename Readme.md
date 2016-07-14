@@ -123,15 +123,12 @@ are very similar to JmsSerializer.
 This annotation can be defined on a class to indicate the exclusion strategy
 that should be used for the class.
 
-+----------+----------------------------------------------------------------+
-| Policy   | Description                                                    |
-+==========+================================================================+
-| all      | all properties are excluded by default; only properties marked |
-|          | with @Expose will be serialized/unserialized                   |
-+----------+----------------------------------------------------------------+
-| none     | no properties are excluded by default; all properties except   |
-|          | those marked with @Exclude will be serialized/unserialized     |
-+----------+----------------------------------------------------------------+
+
+| Policy   | Description |
+| -------- | ----------- |
+| all      | all properties are excluded by default; only properties marked with @Expose will be serialized/unserialized 
+| none     | no properties are excluded by default; all properties except those marked with @Exclude will be serialized/unserialized
+
 
 #### @Exclude
 
