@@ -14,9 +14,23 @@ class Car
     /**
      * @Serializer\SerializedName("super_model")
      */
-    private $model = 'val_model';
+    private $model;
 
-    private $carSize = 'val_sizel';
+    private $carSize;
 
-    private $color = 'val_color';
+    private $color;
+
+    /**
+     *
+     */
+    public function __construct($withValues = false)
+    {
+        if ($withValues) {
+            $this->model = 'val_model';
+            $this->carSize = 'val_size';
+            $this->color = 'val_color';
+        }
+    }
+
+
 }

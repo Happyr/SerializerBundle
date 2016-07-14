@@ -9,7 +9,7 @@ class SerializedNameTest extends SerializerTestCase
 {
     public function testSerialize()
     {
-        $data = $this->serialize(new Car());
+        $data = $this->serialize(new Car(true));
 
         $this->assertTrue(isset($data['super_model']));
         $this->assertTrue(isset($data['car_size']));
@@ -25,7 +25,6 @@ class SerializedNameTest extends SerializerTestCase
         $this->assertPropertyValue($obj, 'carSize', 'size_val');
         $this->assertPropertyValue($obj, 'color', 'color_val');
     }
-
 
     public function testDeserializeWhenIgnoringSerializedName()
     {
