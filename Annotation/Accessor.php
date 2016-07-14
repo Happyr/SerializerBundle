@@ -18,8 +18,7 @@ final class Accessor implements SerializerAnnotation
     public $setter;
 
     /**
-     * @param string $getter
-     * @param string $setter
+     * @param array $values
      */
     public function __construct(array $values)
     {

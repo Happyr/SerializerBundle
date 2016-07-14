@@ -9,13 +9,15 @@ namespace Happyr\SerializerBundle\PropertyManager;
  */
 class AttributeExtractor
 {
-    private $attributesCache = array();
+    /**
+     * @var array
+     */
+    private $attributesCache = [];
 
     /**
      * Gets and caches attributes for this class and context.
      *
-     * @param object $object
-     * @param array  $context
+     * @param object|string $object
      *
      * @return string[]
      */

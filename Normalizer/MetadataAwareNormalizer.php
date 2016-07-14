@@ -19,7 +19,7 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
     use GroupValidationTrait;
 
     /**
-     * @var Metadata[]
+     * @var array
      */
     private $metadata;
 
@@ -45,6 +45,9 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
         $this->propertyNameConverter = $pnc;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function normalize($object, $format = null, array $context = array())
     {
         $meta = $this->getMetadata($object);
@@ -71,6 +74,15 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
         return $normalizedData;
     }
 
+    /**
+     * Normalize a property.
+     *
+     * @param array $normalizedData
+     * @param array $meta
+     * @param $object
+     * @param $propertyName
+     * @param array $context
+     */
     protected function normalizeProperty(array &$normalizedData, array $meta, $object, $propertyName, array $context)
     {
         if (!isset($meta['property'][$propertyName])) {
@@ -87,7 +99,7 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
         $value = ReflectionPropertyAccess::get($object, $propertyName);
         foreach ($meta['property'][$propertyName] as $name => $metaValue) {
             switch ($name) {
-                case 'exclude';
+                case 'exclude':
                     // Skip this
                     return;
                 case 'expose':
@@ -118,6 +130,15 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
         $normalizedData[$serializedName] = $value;
     }
 
+    /**
+     * Normalize a method.
+     *
+     * @param array $normalizedData
+     * @param array $meta
+     * @param $object
+     * @param $methodName
+     * @param array $context
+     */
     protected function normalizeMethod(array &$normalizedData, array $meta, $object, $methodName, array $context)
     {
         if (!isset($meta['method'][$methodName])) {
@@ -132,9 +153,6 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
             switch ($name) {
                 case 'expose':
                     $included = true;
-                    break;
-                case 'serialized_name':
-                    $serializedName = $metaValue;
                     break;
                 case 'groups':
                     $groups = $metaValue;
@@ -169,7 +187,9 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
     }
 
     /**
-     * @param $object
+     * @param object $object
+     *
+     * @return array
      */
     private function getMetadata($object)
     {

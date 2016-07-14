@@ -19,7 +19,7 @@ trait GroupValidationTrait
     {
         foreach ($context['groups'] as $group) {
             if (in_array($group, $groups)) {
-                return $included = true;
+                return true;
             }
         }
 

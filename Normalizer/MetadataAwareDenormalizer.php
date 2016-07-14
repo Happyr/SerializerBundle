@@ -17,9 +17,9 @@ use Symfony\Component\Serializer\Exception\LogicException;
 class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements DenormalizerInterface
 {
     use GroupValidationTrait;
-    
+
     /**
-     * @var Metadata[]
+     * @var array
      */
     private $metadata;
 
@@ -227,7 +227,7 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
     /**
      * @param string $class
      *
-     * @return Metadata|mixed
+     * @return array
      */
     private function getMetadata($class)
     {
