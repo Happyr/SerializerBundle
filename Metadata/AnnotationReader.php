@@ -55,7 +55,9 @@ class AnnotationReader implements MetadataReader
             $finder->in($path)->notName('*Test.php')->name('*.php');
             /** @var SplFileInfo $file */
             foreach ($finder as $file) {
-                $fqcn = str_replace('/', '\\', substr($file->getRelativePathname(), 0, -4));
+                if (null === $fqcn = $this->getFullyQualifiedClassName($file->getPathname())) {
+                    continue;
+                }
                 $metadata = new Metadata($fqcn);
 
                 $attributes = $this->attributeExtractor->getAttributes($fqcn);
@@ -125,5 +127,23 @@ class AnnotationReader implements MetadataReader
         }
 
         return $return;
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return null|string
+     */
+    private function getFullyQualifiedClassName($path)
+    {
+        $src = file_get_contents($path);
+        $filename = basename($path);
+        $classname = substr($filename, 0, -4);
+
+        if (preg_match('|^namespace\s+(.+?);$|sm', $src, $matches)) {
+            return $matches[1].'\\'.$classname;
+        }
+
+        return null;
     }
 }

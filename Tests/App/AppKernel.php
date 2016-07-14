@@ -41,12 +41,4 @@ class AppKernel extends Kernel
     {
         return sys_get_temp_dir().'/serializer-bundle/logs';
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getContainerBaseClass()
-    {
-        return '\PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer';
-    }
 }

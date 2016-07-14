@@ -4,7 +4,7 @@
 [![Build Status](https://img.shields.io/travis/happyr/serializer-bundle.svg?style=flat-square)](https://travis-ci.org/happyr/serializer-bundle)
 [![Total Downloads](https://img.shields.io/packagist/dt/happyr/serializer-bundle.svg?style=flat-square)](https://packagist.org/packages/php-http/httplug-bundle)
 
-**Make the Symfony serialzer easy to use.**
+**Make the Symfony serializer easy to use.**
 
 
 ## Install

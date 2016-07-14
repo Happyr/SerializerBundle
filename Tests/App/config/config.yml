@@ -1,6 +1,7 @@
 framework:
   secret: php-http
   test: ~
+  serializer: { enable_annotations: true }
 
 happyr_serializer:
   source: ['%kernel.root_dir%/../Fixtures']
