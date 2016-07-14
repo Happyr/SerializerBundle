@@ -6,8 +6,6 @@ use Happyr\SerializerBundle\Metadata\MetadataProvider;
 use Happyr\SerializerBundle\Metadata\MetadataReader;
 
 /**
- *
- *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class MetadataProviderTest extends \PHPUnit_Framework_TestCase

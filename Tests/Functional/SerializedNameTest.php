@@ -5,8 +5,6 @@ namespace Happyr\SerializerBundle\Tests\Functional;
 use Happyr\SerializerBundle\Tests\Fixtures\SerializedName\Car;
 
 /**
- *
- *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class SerializedNameTest extends SerializerTestCase

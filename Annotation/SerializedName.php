@@ -7,6 +7,7 @@ use Happyr\SerializerBundle\Exception\RuntimeException;
 /**
  * @Annotation
  * @Target({"PROPERTY", "METHOD"})
+ *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 final class SerializedName implements SerializerAnnotation

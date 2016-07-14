@@ -5,6 +5,7 @@ namespace Happyr\SerializerBundle\Annotation;
 /**
  * @Annotation
  * @Target({"PROPERTY"})
+ *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 final class Type implements SerializerAnnotation

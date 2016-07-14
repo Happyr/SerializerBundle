@@ -6,8 +6,6 @@ use Happyr\SerializerBundle\Tests\Fixtures\ReadOnly\Car;
 use Happyr\SerializerBundle\Tests\Fixtures\ReadOnly\ClassReadOnly;
 
 /**
- *
- *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class ReadOnlyTest extends SerializerTestCase
