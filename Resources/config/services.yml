@@ -1,0 +1,14 @@
+
+services:
+
+  happyr.serializer.metadata.annotation_reader:
+    class: Happyr\SerializerBundle\Metadata\AnnotationReader
+    arguments:
+      - ['%kernel.root_dir%/../src']
+
+  happyr.serializer.metadata.metadata_provider:
+    class: Happyr\SerializerBundle\Metadata\MetadataProvider
+    arguments:
+      - ['@happyr.serializer.metadata.annotation_reader']
+
+

@@ -1,0 +1,17 @@
+
+services:
+  happyr.serializer.normalizer.metadata_aware:
+    class: Happyr\SerializerBundle\Normalizer\MetadataAwareNormalizer
+    arguments: [[]]
+    tags:
+      - { name: "serializer.normalizer", priority: -999 }
+
+
+
+  happyr.serializer.denormalizer.metadata_aware:
+    class: Happyr\SerializerBundle\Normalizer\MetadataAwareDenormalizer
+    arguments: [[]]
+    tags:
+      - { name: "serializer.normalizer", priority: -999 }
+
+
