@@ -9,11 +9,11 @@ class MetadataProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetMetadata()
     {
-        $reader0 = $this->createMock(AnnotationReader::class);
+        $reader0 = $this->getMock(AnnotationReader::class);
         $reader0->expects($this->once())
             ->method('getMetadata')
             ->willReturn(['m0', 'm1']);
-        $reader1 = $this->createMock(AnnotationReader::class);
+        $reader1 = $this->getMock(AnnotationReader::class);
         $reader1->expects($this->once())
             ->method('getMetadata')
             ->willReturn(['m2', 'm3']);
