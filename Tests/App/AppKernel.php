@@ -35,6 +35,30 @@ class AppKernel extends Kernel
     }
 
     /**
+     * Clear the cache before boot.
+     */
+    public function boot()
+    {
+        $this->removeDirectory($this->getCacheDir());
+
+        return parent::boot();
+    }
+
+    /**
+     * Removes a directory and all contents.
+     * @param string $dir
+     *
+     * @return bool
+     */
+    private function removeDirectory($dir) {
+        $files = array_diff(scandir($dir), array('.','..'));
+        foreach ($files as $file) {
+            (is_dir("$dir/$file")) ? $this->removeDirectory("$dir/$file") : unlink("$dir/$file");
+        }
+        return rmdir($dir);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getLogDir()

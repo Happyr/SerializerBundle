@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\SerializerBundle\Tests\Fixtures\SerializedName;
+namespace Happyr\SerializerBundle\Tests\Fixtures\Composition;
 
 use Happyr\SerializerBundle\Annotation as Serializer;
 

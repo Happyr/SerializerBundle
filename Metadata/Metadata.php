@@ -17,17 +17,17 @@ class Metadata
     /**
      * @var array
      */
-    private $classMetadata;
+    private $classMetadata = [];
 
     /**
      * @var array
      */
-    private $methodMetadata;
+    private $methodMetadata = [];
 
     /**
      * @var array
      */
-    private $propertyMetadata;
+    private $propertyMetadata = [];
 
     /**
      * @param string $class

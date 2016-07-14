@@ -9,11 +9,14 @@ use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
+use Symfony\Component\Serializer\Exception\LogicException;
+
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class MetadataAwareDenormalizer implements DenormalizerInterface
+class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements DenormalizerInterface
 {
     /**
      * @var Metadata[]
@@ -46,6 +49,16 @@ class MetadataAwareDenormalizer implements DenormalizerInterface
         foreach ($normalizedData as $attribute => $value) {
             $propertyName = $this->getPropertyName($meta, $attribute);
 
+            if (null !== $value && !is_scalar($value)) {
+                if (!$this->serializer instanceof DenormalizerInterface) {
+                    throw new LogicException(sprintf('Cannot denormalize attribute "%s" because injected serializer is not a normalizer', $attribute));
+                }
+
+                if (null !== $propertyType = $this->getPropertyType($meta, $propertyName)) {
+                    $value = $this->serializer->denormalize($value, $propertyType, $format, $context);
+                }
+            }
+
             $this->setPropertyValue($object, $meta, $propertyName, $value, $context);
         }
 
@@ -73,10 +86,6 @@ class MetadataAwareDenormalizer implements DenormalizerInterface
         $readOnly = false;
         if (isset($meta['class']['read_only']) ? $meta['class']['read_only'] : false) {
             $readOnly = true;
-        }
-
-        if (!isset($meta['property'][$propertyName])) {
-            $meta['property'][$propertyName] = [];
         }
 
         $groups = ['Default'];
@@ -180,6 +189,25 @@ class MetadataAwareDenormalizer implements DenormalizerInterface
 
         // Fallback on the name converter
         return $this->nameConverter->denormalize($name);
+    }
+
+    /**
+     * Get the type of this property
+     *
+     * @param array $meta
+     * @param string $name
+     *
+     * @return null|string
+     */
+    private function getPropertyType($meta, $name)
+    {
+        foreach ($meta['property'][$name] as $metaName => $value) {
+            if ($metaName === 'type') {
+                return $value;
+            }
+        }
+
+        return null;
     }
 
     /**

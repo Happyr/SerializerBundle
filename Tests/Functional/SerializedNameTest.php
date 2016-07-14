@@ -26,6 +26,9 @@ class SerializedNameTest extends SerializerTestCase
         $this->assertPropertyValue($obj, 'color', 'color_val');
     }
 
+    /**
+     * Test when the json data is named as the properties. They should be ignored.
+     */
     public function testDeserializeWhenIgnoringSerializedName()
     {
         $data = ['model'=>'model_val', 'carSize'=>'size_val', 'color'=>'color_val'];

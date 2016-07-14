@@ -6,14 +6,16 @@ use Happyr\SerializerBundle\Annotation\ExclusionPolicy;
 use Happyr\SerializerBundle\Metadata\AttributeExtractor;
 use Happyr\SerializerBundle\Metadata\Metadata;
 use Happyr\SerializerBundle\PropertyAccess\ReflectionPropertyAccess;
+use Symfony\Component\Serializer\Exception\LogicException;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class MetadataAwareNormalizer implements NormalizerInterface
+class MetadataAwareNormalizer extends SerializerAwareNormalizer implements NormalizerInterface
 {
     /**
      * @var Metadata[]
@@ -46,11 +48,21 @@ class MetadataAwareNormalizer implements NormalizerInterface
         $attributes = $this->attributeExtractor->getAttributes($object);
 
         $normalizedData = [];
-        foreach ($attributes['property'] as $name => $bool) {
-            $this->normalizeProperty($normalizedData, $meta, $object, $name, $context);
+        foreach ($attributes['property'] as $propertyName => $bool) {
+            $this->normalizeProperty($normalizedData, $meta, $object, $propertyName, $context);
         }
-        foreach ($attributes['method'] as $name => $bool) {
-            $this->normalizeMethod($normalizedData, $meta, $object, $name, $context);
+        foreach ($attributes['method'] as $propertyName => $bool) {
+            $this->normalizeMethod($normalizedData, $meta, $object, $propertyName, $context);
+        }
+
+        foreach ($normalizedData as $name => $value) {
+            if (null !== $value && !is_scalar($value)) {
+                if (!$this->serializer instanceof NormalizerInterface) {
+                    throw new LogicException(sprintf('Cannot normalize attribute "%s" because injected serializer is not a normalizer', $name));
+                }
+
+                $normalizedData[$name] = $this->serializer->normalize($value, $format, $context);
+            }
         }
 
         return $normalizedData;
@@ -63,10 +75,6 @@ class MetadataAwareNormalizer implements NormalizerInterface
 
         // If this property should be in the output
         $included = $exclusionPolicy === ExclusionPolicy::NONE;
-
-        if (!isset($meta['property'][$propertyName])) {
-            $meta['property'][$propertyName] = [];
-        }
 
         $groups = ['Default'];
         $serializedName = $this->nameConverter->normalize($propertyName);
@@ -113,10 +121,6 @@ class MetadataAwareNormalizer implements NormalizerInterface
 
     protected function normalizeMethod(array &$normalizedData, array &$meta, $object, $methodName, array $context)
     {
-        if (!isset($meta['method'][$methodName])) {
-            $meta['method'][$methodName] = [];
-        }
-
         // Methods are never serialized by default
         $included = false;
 

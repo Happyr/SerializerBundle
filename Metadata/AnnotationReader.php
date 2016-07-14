@@ -107,23 +107,22 @@ class AnnotationReader implements MetadataReader
                     $data[$annotation->getName()] = $annotation->getValue();
                 }
 
+                $metadata->$function($name, $data);
                 if (count($data) > 0) {
                     $return = true;
-                    $metadata->$function($name, $data);
                 }
             }
         }
 
         // Class annotations
         /** @var SerializerAnnotation $annotation */
+        $data = [];
         foreach ($classAnnotations as $annotation) {
-            $data = [];
             $data[$annotation->getName()] = $annotation->getValue();
-
-            if (count($data) > 0) {
-                $return = true;
-                $metadata->setClassMetadata($data);
-            }
+        }
+        $metadata->setClassMetadata($data);
+        if (count($data) > 0) {
+            $return = true;
         }
 
         return $return;
