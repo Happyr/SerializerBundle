@@ -3,7 +3,7 @@
 namespace Happyr\SerializerBundle\Metadata;
 
 use Happyr\SerializerBundle\Annotation\SerializerAnnotation;
-use Happyr\SerializerBundle\PropertyAccess\AttributeExtractor;
+use Happyr\SerializerBundle\PropertyManager\AttributeExtractor;
 use Symfony\Component\Finder\Finder;
 use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\Finder\SplFileInfo;

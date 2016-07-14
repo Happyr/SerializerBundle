@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\SerializerBundle\PropertyAccess;
+namespace Happyr\SerializerBundle\PropertyManager;
 
 /**
  * An easy way to get properties from an object.

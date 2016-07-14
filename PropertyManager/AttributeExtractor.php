@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\SerializerBundle\PropertyAccess;
+namespace Happyr\SerializerBundle\PropertyManager;
 
 /**
  * Extrac attributes from object.

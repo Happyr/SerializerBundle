@@ -2,7 +2,7 @@
 
 namespace Happyr\SerializerBundle\Tests\Functional;
 
-use Happyr\SerializerBundle\PropertyAccess\ReflectionPropertyAccess;
+use Happyr\SerializerBundle\PropertyManager\ReflectionPropertyAccess;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Serializer\SerializerInterface;
 

@@ -4,9 +4,9 @@ namespace Happyr\SerializerBundle\Normalizer;
 
 use Happyr\SerializerBundle\Annotation\ExclusionPolicy;
 use Happyr\SerializerBundle\Metadata\Metadata;
-use Happyr\SerializerBundle\Normalizer\Helper\PropertyNameConverter;
-use Happyr\SerializerBundle\PropertyAccess\AttributeExtractor;
-use Happyr\SerializerBundle\PropertyAccess\ReflectionPropertyAccess;
+use Happyr\SerializerBundle\PropertyManager\AttributeExtractor;
+use Happyr\SerializerBundle\PropertyManager\ReflectionPropertyAccess;
+use Happyr\SerializerBundle\PropertyManager\PropertyNameConverter;
 use Symfony\Component\Serializer\Exception\LogicException;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;

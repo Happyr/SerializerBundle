@@ -17,6 +17,6 @@ services:
 
 
   happyr.serializer.property_access.attribute_extractor:
-    class: Happyr\SerializerBundle\PropertyAccess\AttributeExtractor
+    class: Happyr\SerializerBundle\PropertyManager\AttributeExtractor
     public: false
 

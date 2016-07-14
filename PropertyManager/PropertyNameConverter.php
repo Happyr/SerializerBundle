@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\SerializerBundle\Normalizer\Helper;
+namespace Happyr\SerializerBundle\PropertyManager;
 
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
