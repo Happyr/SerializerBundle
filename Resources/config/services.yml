@@ -3,12 +3,13 @@ services:
 
   happyr.serializer.metadata.annotation_reader:
     class: Happyr\SerializerBundle\Metadata\AnnotationReader
+    public: false
     arguments:
       - [~]
 
   happyr.serializer.metadata.metadata_provider:
     class: Happyr\SerializerBundle\Metadata\MetadataProvider
+    public: false
     arguments:
       - ['@happyr.serializer.metadata.annotation_reader']
-
 

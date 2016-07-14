@@ -4,6 +4,7 @@ namespace Happyr\SerializerBundle\Normalizer;
 
 use Happyr\SerializerBundle\Annotation\ExclusionPolicy;
 use Happyr\SerializerBundle\Metadata\Metadata;
+use Happyr\SerializerBundle\Normalizer\Helper\PropertyNameConverter;
 use Happyr\SerializerBundle\PropertyAccess\ReflectionPropertyAccess;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
@@ -24,17 +25,19 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
     private $metadata;
 
     /**
-     * @var NameConverterInterface
+     * @var PropertyNameConverter
      */
-    private $nameConverter;
+    private $propertyNameConverter;
 
     /**
-     * @param \Happyr\SerializerBundle\Metadata\Metadata[] $metadata
+     *
+     * @param array $metadata
+     * @param PropertyNameConverter $pnc
      */
-    public function __construct(array $metadata = [])
+    public function __construct(array $metadata, PropertyNameConverter $pnc)
     {
         $this->metadata = $metadata;
-        $this->nameConverter = new CamelCaseToSnakeCaseNameConverter();
+        $this->propertyNameConverter = $pnc;
     }
 
     /**
@@ -47,7 +50,10 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
         $object = $this->getInstance($class, $context);
 
         foreach ($normalizedData as $attribute => $value) {
-            $propertyName = $this->getPropertyName($meta, $attribute);
+            if (null === $propertyName = $this->getPropertyName($meta, $attribute)) {
+                // Name is invalid, skip this
+                continue;
+            }
 
             if (null !== $value && !is_scalar($value)) {
                 if (!$this->serializer instanceof DenormalizerInterface) {
@@ -173,26 +179,26 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
     }
 
     /**
-     * Get the property name for this normalized key name.
+     * Get the property name for this normalized key name. This will aslo verify if the name is correct.
      *
      * @param array  $rootMeta
-     * @param string $name
+     * @param string $serializedName
      *
-     * @return string
+     * @return string|null
      */
-    private function getPropertyName($rootMeta, $name)
+    private function getPropertyName($rootMeta, $serializedName)
     {
-        // Try find the name in the meta values
-        foreach ($rootMeta['property'] as $prop => $meta) {
-            foreach ($meta as $metaName => $value) {
-                if ($metaName === 'serialized_name' && $value === $name) {
-                    return $prop;
-                }
-            }
+        $propertyName = $this->propertyNameConverter->getPropertyName($rootMeta, $serializedName);
+
+        $meta = isset($rootMeta['property'][$propertyName]) ? $rootMeta['property'][$propertyName]: [];
+        $verify = $this->propertyNameConverter->getSerializedName($meta, $propertyName);
+
+        if ($serializedName === $verify) {
+            return $propertyName;
         }
 
-        // Fallback on the name converter
-        return $this->nameConverter->denormalize($name);
+        // The $serializedName was fake
+        return;
     }
 
     /**

@@ -5,10 +5,9 @@ namespace Happyr\SerializerBundle\Normalizer;
 use Happyr\SerializerBundle\Annotation\ExclusionPolicy;
 use Happyr\SerializerBundle\Metadata\AttributeExtractor;
 use Happyr\SerializerBundle\Metadata\Metadata;
+use Happyr\SerializerBundle\Normalizer\Helper\PropertyNameConverter;
 use Happyr\SerializerBundle\PropertyAccess\ReflectionPropertyAccess;
 use Symfony\Component\Serializer\Exception\LogicException;
-use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
-use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
 
@@ -28,18 +27,20 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
     private $attributeExtractor;
 
     /**
-     * @var NameConverterInterface
+     * @var PropertyNameConverter
      */
-    private $nameConverter;
+    private $propertyNameConverter;
 
     /**
-     * @param \Happyr\SerializerBundle\Metadata\Metadata[] $metadata
+     *
+     * @param array $metadata
+     * @param PropertyNameConverter $pnc
      */
-    public function __construct(array $metadata = [])
+    public function __construct(array $metadata, PropertyNameConverter $pnc)
     {
         $this->metadata = $metadata;
         $this->attributeExtractor = new AttributeExtractor();
-        $this->nameConverter = new CamelCaseToSnakeCaseNameConverter();
+        $this->propertyNameConverter = $pnc;
     }
 
     public function normalize($object, $format = null, array $context = array())
@@ -68,7 +69,7 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
         return $normalizedData;
     }
 
-    protected function normalizeProperty(array &$normalizedData, array &$meta, $object, $propertyName, array $context)
+    protected function normalizeProperty(array &$normalizedData, array $meta, $object, $propertyName, array $context)
     {
         if (!isset($meta['property'][$propertyName])) {
             $meta['property'][$propertyName] = [];
@@ -81,9 +82,7 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
         $included = $exclusionPolicy === ExclusionPolicy::NONE;
 
         $groups = ['Default'];
-        $serializedName = $this->nameConverter->normalize($propertyName);
         $value = ReflectionPropertyAccess::get($object, $propertyName);
-
         foreach ($meta['property'][$propertyName] as $name => $metaValue) {
             switch ($name) {
                 case 'exclude';
@@ -91,9 +90,6 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
                     return;
                 case 'expose':
                     $included = true;
-                    break;
-                case 'serialized_name':
-                    $serializedName = $metaValue;
                     break;
                 case 'accessor':
                     if (isset($metaValue['getter'])) {
@@ -118,12 +114,15 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
             }
         }
 
-        if ($included) {
-            $normalizedData[$serializedName] = $value;
+        if (!$included) {
+            return;
         }
+
+        $serializedName = $this->propertyNameConverter->getSerializedName($meta['property'][$propertyName], $propertyName);
+        $normalizedData[$serializedName] = $value;
     }
 
-    protected function normalizeMethod(array &$normalizedData, array &$meta, $object, $methodName, array $context)
+    protected function normalizeMethod(array &$normalizedData, array $meta, $object, $methodName, array $context)
     {
         if (!isset($meta['method'][$methodName])) {
             $meta['method'][$methodName] = [];
@@ -133,7 +132,6 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
         $included = false;
 
         $groups = ['Default'];
-        $serializedName = $this->nameConverter->normalize($methodName);
         foreach ($meta['method'][$methodName] as $name => $metaValue) {
             switch ($name) {
                 case 'expose':
@@ -159,9 +157,12 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
             }
         }
 
-        if ($included) {
-            $normalizedData[$serializedName] = $object->$methodName();
+        if (!$included) {
+            return;
         }
+
+        $serializedName = $this->propertyNameConverter->getSerializedName($meta['method'][$methodName], $methodName);
+        $normalizedData[$serializedName] = $object->$methodName();
     }
 
     /**

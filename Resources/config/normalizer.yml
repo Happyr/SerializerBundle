@@ -2,16 +2,19 @@
 services:
   happyr.serializer.normalizer.metadata_aware:
     class: Happyr\SerializerBundle\Normalizer\MetadataAwareNormalizer
-    arguments: [[]]
+    arguments: [[], "@happyr.serializer.normalizer.heler.property_name_converter"]
+    public: false
     tags:
       - { name: "serializer.normalizer", priority: -999 }
-
-
 
   happyr.serializer.denormalizer.metadata_aware:
     class: Happyr\SerializerBundle\Normalizer\MetadataAwareDenormalizer
-    arguments: [[]]
+    arguments: [[], "@happyr.serializer.normalizer.heler.property_name_converter"]
+    public: false
     tags:
       - { name: "serializer.normalizer", priority: -999 }
 
-
+  happyr.serializer.normalizer.heler.property_name_converter:
+    class: Happyr\SerializerBundle\Normalizer\Helper\PropertyNameConverter
+    arguments: [~]
+    public: false
