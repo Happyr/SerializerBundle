@@ -2,18 +2,18 @@
 
 namespace Happyr\SerializerBundle\Tests\Unit\Metadata;
 
-use Happyr\SerializerBundle\Metadata\AnnotationReader;
 use Happyr\SerializerBundle\Metadata\MetadataProvider;
+use Happyr\SerializerBundle\Metadata\MetadataReader;
 
 class MetadataProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetMetadata()
     {
-        $reader0 = $this->getMock(AnnotationReader::class);
+        $reader0 = $this->getMock(MetadataReader::class);
         $reader0->expects($this->once())
             ->method('getMetadata')
             ->willReturn(['m0', 'm1']);
-        $reader1 = $this->getMock(AnnotationReader::class);
+        $reader1 = $this->getMock(MetadataReader::class);
         $reader1->expects($this->once())
             ->method('getMetadata')
             ->willReturn(['m2', 'm3']);
