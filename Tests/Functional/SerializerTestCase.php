@@ -37,7 +37,7 @@ class SerializerTestCase extends WebTestCase
      *
      * @return array assoc
      */
-    protected function serialize($obj, array $context = array())
+    protected function serialize($obj, array $context = [])
     {
         $json = $this->getSerializer()->serialize($obj, 'json', $context);
 
@@ -51,7 +51,7 @@ class SerializerTestCase extends WebTestCase
      *
      * @return object
      */
-    protected function deserialize(array $data, $type, array $context = array())
+    protected function deserialize(array $data, $type, array $context = [])
     {
         return $this->getSerializer()->deserialize(json_encode($data), $type, 'json', $context);
     }

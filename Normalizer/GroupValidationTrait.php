@@ -3,8 +3,6 @@
 namespace Happyr\SerializerBundle\Normalizer;
 
 /**
- *
- *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 trait GroupValidationTrait
