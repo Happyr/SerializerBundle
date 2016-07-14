@@ -92,7 +92,7 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
                     $included = true;
                     break;
                 case 'accessor':
-                    if (isset($metaValue['getter'])) {
+                    if (!empty($metaValue['getter'])) {
                         $accessor = $metaValue['getter'];
                         $value = $object->$accessor();
                     }

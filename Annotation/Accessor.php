@@ -17,6 +17,24 @@ final class Accessor implements SerializerAnnotation
      */
     public $setter;
 
+    /**
+     *
+     *
+     * @param string $getter
+     * @param string $setter
+     */
+    public function __construct(array $values)
+    {
+        $values = $values['value'];
+        if (!empty($values['getter'])) {
+            $this->getter = $values['getter'];
+        }
+        if (!empty($values['setter'])) {
+            $this->setter = $values['setter'];
+        }
+    }
+
+
     public function getName()
     {
         return 'accessor';
@@ -27,3 +45,4 @@ final class Accessor implements SerializerAnnotation
         return ['setter' => $this->setter, 'getter' => $this->getter];
     }
 }
+
