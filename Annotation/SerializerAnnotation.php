@@ -2,6 +2,9 @@
 
 namespace Happyr\SerializerBundle\Annotation;
 
+/**
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
 interface SerializerAnnotation
 {
     /**

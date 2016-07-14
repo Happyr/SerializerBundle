@@ -9,13 +9,14 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class SerializerExtension extends \Twig_Extension
 {
+    /**
+     * @var SerializerInterface
+     */
     protected $serializer;
 
-    public function getName()
-    {
-        return 'happyr_serializer';
-    }
-
+    /**
+     * @param SerializerInterface $serializer
+     */
     public function __construct(SerializerInterface $serializer)
     {
         $this->serializer = $serializer;
@@ -36,5 +37,13 @@ class SerializerExtension extends \Twig_Extension
     public function serialize($object, $type = 'json', array $context = [])
     {
         return $this->serializer->serialize($object, $type, $context);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'happyr_serializer';
     }
 }

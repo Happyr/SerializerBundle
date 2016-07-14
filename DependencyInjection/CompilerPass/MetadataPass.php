@@ -6,6 +6,11 @@ use Happyr\SerializerBundle\Metadata\Metadata;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+/**
+ * Collect and give the metadata to the normalizers.
+ *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
 class MetadataPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)

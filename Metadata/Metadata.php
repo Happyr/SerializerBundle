@@ -3,7 +3,7 @@
 namespace Happyr\SerializerBundle\Metadata;
 
 /**
- * A class to help build upp metadata.
+ * A class to help build up metadata.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */

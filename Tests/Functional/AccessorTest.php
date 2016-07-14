@@ -4,6 +4,11 @@ namespace Happyr\SerializerBundle\Tests\Functional;
 
 use Happyr\SerializerBundle\Tests\Fixtures\Accessor\Car;
 
+/**
+ *
+ *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
 class AccessorTest extends SerializerTestCase
 {
     public function testSerialize()

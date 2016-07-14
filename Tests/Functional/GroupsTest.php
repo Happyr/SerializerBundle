@@ -4,6 +4,11 @@ namespace Happyr\SerializerBundle\Tests\Functional;
 
 use Happyr\SerializerBundle\Tests\Fixtures\Groups\Car;
 
+/**
+ *
+ *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
 class GroupsTest extends SerializerTestCase
 {
     public function testSerialize()

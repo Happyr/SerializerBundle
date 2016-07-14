@@ -5,6 +5,7 @@ namespace Happyr\SerializerBundle\Annotation;
 /**
  * @Annotation
  * @Target({"PROPERTY", "CLASS"})
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 final class ReadOnly implements SerializerAnnotation
 {

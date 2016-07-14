@@ -8,9 +8,9 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * This is the class that loads and manages your bundle configuration.
  *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
+ *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class HappyrSerializerExtension extends Extension
 {
@@ -24,6 +24,10 @@ class HappyrSerializerExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        if ($config['twig_extension']) {
+            $loader->load('twig.yml');
+        }
 
         if (empty($config['source'])) {
             // Try to help

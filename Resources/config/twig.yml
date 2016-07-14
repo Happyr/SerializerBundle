@@ -1,0 +1,7 @@
+services:
+  happyr.serializer.twig.serializer:
+    class: Happyr\SerializerBundle\Twig\SerializerExtension
+    arguments: ["@serializer"]
+    public: false
+    tags:
+      - { name: 'twig.extension' }

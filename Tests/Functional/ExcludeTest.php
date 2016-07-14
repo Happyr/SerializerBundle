@@ -4,6 +4,11 @@ namespace Happyr\SerializerBundle\Tests\Functional;
 
 use Happyr\SerializerBundle\Tests\Fixtures\Exclude\Car;
 
+/**
+ *
+ *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
 class ExcludeTest extends SerializerTestCase
 {
     public function testSerialize()

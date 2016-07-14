@@ -6,7 +6,8 @@ use Happyr\SerializerBundle\Exception\RuntimeException;
 
 /**
  * @Annotation
- * @Target({"PROPERTY", "CLASS"})
+ * @Target({"CLASS"})
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 final class ExclusionPolicy implements SerializerAnnotation
 {

@@ -113,6 +113,7 @@ You need to provide one or more paths to where your source code is.
 // app/config/config.yml
 happyr_serializer:
   source: ['%kernel.root_dir%/../src'] # default
+  twig_extension: false # default
 ```
 
 ## Adding metadata

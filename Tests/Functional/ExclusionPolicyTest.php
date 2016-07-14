@@ -6,6 +6,11 @@ use Happyr\SerializerBundle\Tests\Fixtures\ExclusionPolicy\ExcludeAll;
 use Happyr\SerializerBundle\Tests\Fixtures\ExclusionPolicy\ExcludeDefault;
 use Happyr\SerializerBundle\Tests\Fixtures\ExclusionPolicy\ExcludeNone;
 
+/**
+ *
+ *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
 class ExclusionPolicyTest extends SerializerTestCase
 {
     public function testSerializeDefault()

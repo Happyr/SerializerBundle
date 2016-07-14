@@ -3,7 +3,7 @@
 namespace Happyr\SerializerBundle\PropertyManager;
 
 /**
- * Extrac attributes from object.
+ * Extract attributes from object.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
