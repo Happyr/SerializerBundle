@@ -17,7 +17,7 @@ class ReadOnlyTest extends SerializerTestCase
 
     public function testDeserialize()
     {
-        $data = ['model'=>'model_value', 'size'=>'size_value'];
+        $data = ['model' => 'model_value', 'size' => 'size_value'];
         $obj = $this->deserialize($data, Car::class);
 
         $this->assertPropertyValue($obj, 'model', null);
@@ -31,12 +31,11 @@ class ReadOnlyTest extends SerializerTestCase
         $this->assertTrue(isset($data['model']));
         $this->assertTrue(isset($data['size']));
         $this->assertTrue(isset($data['color']));
-
     }
 
     public function testDeserializeReadOnlyClass()
     {
-        $data = ['model'=>'model_value', 'size'=>'size_value', 'color'=>'color_value'];
+        $data = ['model' => 'model_value', 'size' => 'size_value', 'color' => 'color_value'];
         $obj = $this->deserialize($data, ClassReadOnly::class);
 
         $this->assertPropertyValue($obj, 'model', 'model_value');

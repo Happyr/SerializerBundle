@@ -16,10 +16,9 @@ class AccessorTest extends SerializerTestCase
 
     public function testDeserialize()
     {
-        $data = ['model'=>'model_val'];
+        $data = ['model' => 'model_val'];
         $obj = $this->deserialize($data, Car::class);
 
         $this->assertPropertyValue($obj, 'model', 'model_val_setter');
     }
-
 }

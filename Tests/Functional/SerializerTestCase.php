@@ -19,7 +19,6 @@ class SerializerTestCase extends WebTestCase
     }
 
     /**
-     *
      * @return SerializerInterface
      */
     protected function getSerializer()
@@ -46,9 +45,9 @@ class SerializerTestCase extends WebTestCase
     }
 
     /**
-     * @param array $data
+     * @param array  $data
      * @param string $type
-     * @param array $context
+     * @param array  $context
      *
      * @return object
      */
@@ -58,10 +57,11 @@ class SerializerTestCase extends WebTestCase
     }
 
     /**
-     * Assert $obj->name is $value
+     * Assert $obj->name is $value.
+     *
      * @param object $obj
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      */
     protected function assertPropertyValue($obj, $name, $value)
     {

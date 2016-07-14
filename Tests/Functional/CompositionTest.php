@@ -4,10 +4,9 @@ namespace Happyr\SerializerBundle\Tests\Functional;
 
 use Happyr\SerializerBundle\Tests\Fixtures\Composition\Car;
 use Happyr\SerializerBundle\Tests\Fixtures\Composition\Owner;
-use Happyr\SerializerBundle\Tests\Fixtures\Composition\OwnerWithoutType;
 
 /**
- * Test what happens when a object owns another
+ * Test what happens when a object owns another.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */

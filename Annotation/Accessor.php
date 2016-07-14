@@ -18,8 +18,6 @@ final class Accessor implements SerializerAnnotation
     public $setter;
 
     /**
-     *
-     *
      * @param string $getter
      * @param string $setter
      */
@@ -34,7 +32,6 @@ final class Accessor implements SerializerAnnotation
         }
     }
 
-
     public function getName()
     {
         return 'accessor';
@@ -45,4 +42,3 @@ final class Accessor implements SerializerAnnotation
         return ['setter' => $this->setter, 'getter' => $this->getter];
     }
 }
-

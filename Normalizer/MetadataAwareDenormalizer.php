@@ -6,13 +6,10 @@ use Happyr\SerializerBundle\Annotation\ExclusionPolicy;
 use Happyr\SerializerBundle\Metadata\Metadata;
 use Happyr\SerializerBundle\Normalizer\Helper\PropertyNameConverter;
 use Happyr\SerializerBundle\PropertyAccess\ReflectionPropertyAccess;
-use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
-use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
 use Symfony\Component\Serializer\Exception\LogicException;
-
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -30,8 +27,7 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
     private $propertyNameConverter;
 
     /**
-     *
-     * @param array $metadata
+     * @param array                 $metadata
      * @param PropertyNameConverter $pnc
      */
     public function __construct(array $metadata, PropertyNameConverter $pnc)
@@ -190,7 +186,7 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
     {
         $propertyName = $this->propertyNameConverter->getPropertyName($rootMeta, $serializedName);
 
-        $meta = isset($rootMeta['property'][$propertyName]) ? $rootMeta['property'][$propertyName]: [];
+        $meta = isset($rootMeta['property'][$propertyName]) ? $rootMeta['property'][$propertyName] : [];
         $verify = $this->propertyNameConverter->getSerializedName($meta, $propertyName);
 
         if ($serializedName === $verify) {
@@ -202,9 +198,9 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
     }
 
     /**
-     * Get the type of this property
+     * Get the type of this property.
      *
-     * @param array $meta
+     * @param array  $meta
      * @param string $name
      *
      * @return null|string
@@ -217,7 +213,7 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
             }
         }
 
-        return null;
+        return;
     }
 
     /**

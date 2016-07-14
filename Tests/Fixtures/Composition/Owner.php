@@ -4,7 +4,6 @@ namespace Happyr\SerializerBundle\Tests\Fixtures\Composition;
 
 use Happyr\SerializerBundle\Annotation as Serializer;
 
-
 class Owner
 {
     private $name;

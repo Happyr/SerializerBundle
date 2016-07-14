@@ -16,7 +16,7 @@ class ExposeTest extends SerializerTestCase
 
     public function testDeserialize()
     {
-        $data = ['model'=>'model_value', 'size'=>'size_value'];
+        $data = ['model' => 'model_value', 'size' => 'size_value'];
         $obj = $this->deserialize($data, Car::class);
 
         $this->assertPropertyValue($obj, 'model', 'model_value');

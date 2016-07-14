@@ -2,7 +2,6 @@
 
 namespace Happyr\SerializerBundle\Tests\Functional;
 
-
 use Happyr\SerializerBundle\Tests\Fixtures\SerializedName\Car;
 
 class SerializedNameTest extends SerializerTestCase
@@ -18,7 +17,7 @@ class SerializedNameTest extends SerializerTestCase
 
     public function testDeserialize()
     {
-        $data = ['super_model'=>'model_val', 'car_size'=>'size_val', 'color'=>'color_val'];
+        $data = ['super_model' => 'model_val', 'car_size' => 'size_val', 'color' => 'color_val'];
         $obj = $this->deserialize($data, Car::class);
 
         $this->assertPropertyValue($obj, 'model', 'model_val');
@@ -31,7 +30,7 @@ class SerializedNameTest extends SerializerTestCase
      */
     public function testDeserializeWhenIgnoringSerializedName()
     {
-        $data = ['model'=>'model_val', 'carSize'=>'size_val', 'color'=>'color_val'];
+        $data = ['model' => 'model_val', 'carSize' => 'size_val', 'color' => 'color_val'];
         $obj = $this->deserialize($data, Car::class);
 
         $this->assertPropertyValue($obj, 'model', null);

@@ -30,7 +30,7 @@ class HappyrSerializerExtension extends Extension
             // Try to help
             $path = $container->getParameter('kernel.root_dir').'/../src';
             if (!is_dir($path)) {
-                throw new \Exception("You must specify a path at happyr_serializer.source");
+                throw new \Exception('You must specify a path at happyr_serializer.source');
             }
             $config['source'] = [$path];
         }

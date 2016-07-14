@@ -31,9 +31,8 @@ class AnnotationReader implements MetadataReader
     private $attributeExtractor;
 
     /**
-     *
-     * @param array $paths
-     * @param Reader $reader
+     * @param array              $paths
+     * @param Reader             $reader
      * @param AttributeExtractor $attributeExtractor
      */
     public function __construct(array $paths, Reader $reader, AttributeExtractor $attributeExtractor)
@@ -147,6 +146,6 @@ class AnnotationReader implements MetadataReader
             return $matches[1].'\\'.$classname;
         }
 
-        return null;
+        return;
     }
 }

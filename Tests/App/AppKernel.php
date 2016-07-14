@@ -10,11 +10,11 @@ class AppKernel extends Kernel
      */
     public function registerBundles()
     {
-        $bundles =  [
+        $bundles = [
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Happyr\SerializerBundle\HappyrSerializerBundle(),
         ];
-        
+
         return $bundles;
     }
 
@@ -46,15 +46,18 @@ class AppKernel extends Kernel
 
     /**
      * Removes a directory and all contents.
+     *
      * @param string $dir
      *
      * @return bool
      */
-    private function removeDirectory($dir) {
-        $files = array_diff(scandir($dir), array('.','..'));
+    private function removeDirectory($dir)
+    {
+        $files = array_diff(scandir($dir), array('.', '..'));
         foreach ($files as $file) {
             (is_dir("$dir/$file")) ? $this->removeDirectory("$dir/$file") : unlink("$dir/$file");
         }
+
         return rmdir($dir);
     }
 

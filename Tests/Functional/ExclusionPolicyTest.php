@@ -8,7 +8,6 @@ use Happyr\SerializerBundle\Tests\Fixtures\ExclusionPolicy\ExcludeNone;
 
 class ExclusionPolicyTest extends SerializerTestCase
 {
-
     public function testSerializeDefault()
     {
         $data = $this->serialize(new ExcludeDefault(true));
@@ -38,7 +37,7 @@ class ExclusionPolicyTest extends SerializerTestCase
 
     public function testDeserializeDefault()
     {
-        $data = ['model'=>'model_value', 'size'=>'size_value', 'color'=>'color_value'];
+        $data = ['model' => 'model_value', 'size' => 'size_value', 'color' => 'color_value'];
         $obj = $this->deserialize($data, ExcludeDefault::class);
 
         $this->assertPropertyValue($obj, 'model', null);
@@ -48,7 +47,7 @@ class ExclusionPolicyTest extends SerializerTestCase
 
     public function testDeserializeNone()
     {
-        $data = ['model'=>'model_value', 'size'=>'size_value', 'color'=>'color_value'];
+        $data = ['model' => 'model_value', 'size' => 'size_value', 'color' => 'color_value'];
         $obj = $this->deserialize($data, ExcludeNone::class);
 
         $this->assertPropertyValue($obj, 'model', null);
@@ -58,7 +57,7 @@ class ExclusionPolicyTest extends SerializerTestCase
 
     public function testDeserializeAll()
     {
-        $data = ['model'=>'model_value', 'size'=>'size_value', 'color'=>'color_value'];
+        $data = ['model' => 'model_value', 'size' => 'size_value', 'color' => 'color_value'];
         $obj = $this->deserialize($data, ExcludeAll::class);
 
         $this->assertPropertyValue($obj, 'model', null);

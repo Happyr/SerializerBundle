@@ -32,9 +32,8 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
     private $propertyNameConverter;
 
     /**
-     *
-     * @param array $metadata
-     * @param AttributeExtractor $attributeExtractor
+     * @param array                 $metadata
+     * @param AttributeExtractor    $attributeExtractor
      * @param PropertyNameConverter $pnc
      */
     public function __construct(array $metadata, AttributeExtractor $attributeExtractor, PropertyNameConverter $pnc)
