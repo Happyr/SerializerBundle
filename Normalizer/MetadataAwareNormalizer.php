@@ -3,9 +3,9 @@
 namespace Happyr\SerializerBundle\Normalizer;
 
 use Happyr\SerializerBundle\Annotation\ExclusionPolicy;
-use Happyr\SerializerBundle\Metadata\AttributeExtractor;
 use Happyr\SerializerBundle\Metadata\Metadata;
 use Happyr\SerializerBundle\Normalizer\Helper\PropertyNameConverter;
+use Happyr\SerializerBundle\PropertyAccess\AttributeExtractor;
 use Happyr\SerializerBundle\PropertyAccess\ReflectionPropertyAccess;
 use Symfony\Component\Serializer\Exception\LogicException;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -34,12 +34,13 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
     /**
      *
      * @param array $metadata
+     * @param AttributeExtractor $attributeExtractor
      * @param PropertyNameConverter $pnc
      */
-    public function __construct(array $metadata, PropertyNameConverter $pnc)
+    public function __construct(array $metadata, AttributeExtractor $attributeExtractor, PropertyNameConverter $pnc)
     {
         $this->metadata = $metadata;
-        $this->attributeExtractor = new AttributeExtractor();
+        $this->attributeExtractor = $attributeExtractor;
         $this->propertyNameConverter = $pnc;
     }
 

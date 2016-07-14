@@ -3,8 +3,9 @@
 namespace Happyr\SerializerBundle\Metadata;
 
 use Happyr\SerializerBundle\Annotation\SerializerAnnotation;
+use Happyr\SerializerBundle\PropertyAccess\AttributeExtractor;
 use Symfony\Component\Finder\Finder;
-use Doctrine\Common\Annotations\AnnotationReader as Reader;
+use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
@@ -30,13 +31,16 @@ class AnnotationReader implements MetadataReader
     private $attributeExtractor;
 
     /**
-     * @param $paths
+     *
+     * @param array $paths
+     * @param Reader $reader
+     * @param AttributeExtractor $attributeExtractor
      */
-    public function __construct(array $paths = [])
+    public function __construct(array $paths, Reader $reader, AttributeExtractor $attributeExtractor)
     {
         $this->paths = $paths;
-        $this->reader = new Reader();
-        $this->attributeExtractor = new AttributeExtractor();
+        $this->reader = $reader;
+        $this->attributeExtractor = $attributeExtractor;
     }
 
     /**

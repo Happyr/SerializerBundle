@@ -5,11 +5,18 @@ services:
     class: Happyr\SerializerBundle\Metadata\AnnotationReader
     public: false
     arguments:
-      - [~]
+      - []
+      - '@annotation_reader'
+      - "@happyr.serializer.property_access.attribute_extractor"
 
   happyr.serializer.metadata.metadata_provider:
     class: Happyr\SerializerBundle\Metadata\MetadataProvider
     public: false
     arguments:
       - ['@happyr.serializer.metadata.annotation_reader']
+
+
+  happyr.serializer.property_access.attribute_extractor:
+    class: Happyr\SerializerBundle\PropertyAccess\AttributeExtractor
+    public: false
 

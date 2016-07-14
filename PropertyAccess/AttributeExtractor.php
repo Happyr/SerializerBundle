@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\SerializerBundle\Metadata;
+namespace Happyr\SerializerBundle\PropertyAccess;
 
 /**
  * Extrac attributes from object.
