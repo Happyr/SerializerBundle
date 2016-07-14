@@ -2,7 +2,7 @@
 [![Latest Version](https://img.shields.io/github/release/happyr/serializer-bundle.svg?style=flat-square)](https://github.com/happyr/serializer-bundle/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Build Status](https://img.shields.io/travis/happyr/serializer-bundle.svg?style=flat-square)](https://travis-ci.org/happyr/serializer-bundle)
-[![Total Downloads](https://img.shields.io/packagist/dt/happyr/serializer-bundle.svg?style=flat-square)](https://packagist.org/packages/php-http/httplug-bundle)
+[![Total Downloads](https://img.shields.io/packagist/dt/happyr/serializer-bundle.svg?style=flat-square)](https://packagist.org/packages/happyr/serializer-bundle)
 
 **Make the Symfony's serializer easy to use.**
 
