@@ -24,7 +24,6 @@ class HappyrSerializerExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-        $loader->load('normalizer.yml');
 
         if (empty($config['source'])) {
             // Try to help
