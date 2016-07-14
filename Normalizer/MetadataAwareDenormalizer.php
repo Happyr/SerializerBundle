@@ -41,7 +41,7 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
     /**
      * {@inheritdoc}
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         $meta = $this->getMetadata($class);
         $normalizedData = (array) $data;

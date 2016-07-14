@@ -23,9 +23,9 @@ class SerializerExtension extends \Twig_Extension
 
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('serialize', array($this, 'serialize')),
-        );
+        return [
+            new \Twig_SimpleFilter('serialize', [$this, 'serialize']),
+        ];
     }
 
     /**
@@ -33,7 +33,7 @@ class SerializerExtension extends \Twig_Extension
      * @param string $type
      * @param array  $context
      */
-    public function serialize($object, $type = 'json', array $context = array())
+    public function serialize($object, $type = 'json', array $context = [])
     {
         return $this->serializer->serialize($object, $type, $context);
     }

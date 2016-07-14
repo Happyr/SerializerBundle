@@ -118,7 +118,7 @@ class AnnotationReader implements MetadataReader
         }
 
         // Class annotations
-        /** @var SerializerAnnotation $annotation */
+        /* @var SerializerAnnotation $annotation */
         $data = [];
         foreach ($classAnnotations as $annotation) {
             $data[$annotation->getName()] = $annotation->getValue();
