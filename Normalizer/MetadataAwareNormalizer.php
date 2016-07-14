@@ -181,6 +181,10 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
      */
     public function supportsNormalization($data, $format = null)
     {
+        if (!is_object($data)) {
+            return false;
+        }
+
         $class = get_class($data);
 
         return isset($this->metadata[$class]);
