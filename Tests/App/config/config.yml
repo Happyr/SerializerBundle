@@ -1,0 +1,6 @@
+framework:
+  secret: php-http
+  test: ~
+
+happyr_serializer:
+  source: ['%kernel.root_dir%/../Fixtures']

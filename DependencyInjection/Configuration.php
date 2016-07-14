@@ -16,7 +16,23 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('happyr_serializer');
+        $root = $treeBuilder->root('happyr_serializer');
+
+        $root->children()
+            ->arrayNode('source')
+                ->prototype('scalar')
+                ->validate()
+                ->always(function ($v) {
+                    $v = str_replace(DIRECTORY_SEPARATOR, '/', $v);
+
+                    if (!is_dir($v)) {
+                        throw new \Exception(sprintf('The directory "%s" does not exist.', $v));
+                    }
+                    return $v;
+                })
+                ->end()
+            ->end();
+
 
         return $treeBuilder;
     }

@@ -55,11 +55,11 @@ class AnnotationReader implements MetadataReader
             $finder->in($path)->notName('*Test.php')->name('*.php');
             /** @var SplFileInfo $file */
             foreach ($finder as $file) {
-                $fqn = str_replace('/', '\\', substr($file->getRelativePathname(), 0, -4));
-                $metadata = new Metadata($fqn);
+                $fqcn = str_replace('/', '\\', substr($file->getRelativePathname(), 0, -4));
+                $metadata = new Metadata($fqcn);
 
-                $attributes = $this->attributeExtractor->getAttributes($fqn);
-                $reflectionClass = new \ReflectionClass($fqn);
+                $attributes = $this->attributeExtractor->getAttributes($fqcn);
+                $reflectionClass = new \ReflectionClass($fqcn);
                 $classAnnotations = array_filter($this->reader->getClassAnnotations($reflectionClass), $filterAnnotations);
 
                 $propertyAnnotations = [];
