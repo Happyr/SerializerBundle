@@ -4,9 +4,6 @@ namespace Happyr\SerializerBundle\Tests\Fixtures\ReadOnly;
 
 use Happyr\SerializerBundle\Annotation as Serializer;
 
-/**
- * @Serializer\ExclusionPolicy("none")
- */
 class Car
 {
     /**

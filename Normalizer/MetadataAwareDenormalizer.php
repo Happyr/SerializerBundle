@@ -86,8 +86,8 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
             $meta['property'][$propertyName] = [];
         }
 
-        // Default exclusion policy is ALL
-        $exclusionPolicy = isset($meta['class']['exclusion_policy']) ? $meta['class']['exclusion_policy'] : ExclusionPolicy::ALL;
+        // Default exclusion policy is NONE
+        $exclusionPolicy = isset($meta['class']['exclusion_policy']) ? $meta['class']['exclusion_policy'] : ExclusionPolicy::NONE;
 
         // If this property should be in the output
         $included = $exclusionPolicy === ExclusionPolicy::NONE;

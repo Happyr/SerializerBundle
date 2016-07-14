@@ -1,26 +1,26 @@
 <?php
 
-namespace Happyr\SerializerBundle\Tests\Fixtures\Composition;
+namespace Happyr\SerializerBundle\Tests\Fixtures\Expose;
 
 use Happyr\SerializerBundle\Annotation as Serializer;
 
+/**
+ * @Serializer\ExclusionPolicy("all")
+ */
 class Car
 {
     /**
-     * @Serializer\SerializedName("super_model")
+     * @Serializer\Expose
      */
     private $model;
 
-    private $carSize;
-
-    private $color;
+    private $size;
 
     public function __construct($withValues = false)
     {
         if ($withValues) {
             $this->model = 'val_model';
-            $this->carSize = 'val_size';
-            $this->color = 'val_color';
+            $this->size = 'val_size';
         }
     }
 }

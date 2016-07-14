@@ -1,17 +1,23 @@
 <?php
 
-namespace Happyr\SerializerBundle\Tests\Fixtures\Composition;
+namespace Happyr\SerializerBundle\Tests\Fixtures\ExclusionPolicy;
 
 use Happyr\SerializerBundle\Annotation as Serializer;
 
-class Car
+/**
+ * @Serializer\ExclusionPolicy("all")
+ */
+class ExcludeAll
 {
     /**
-     * @Serializer\SerializedName("super_model")
+     * @Serializer\Exclude
      */
     private $model;
 
-    private $carSize;
+    /**
+     * @Serializer\Expose
+     */
+    private $size;
 
     private $color;
 
@@ -19,7 +25,7 @@ class Car
     {
         if ($withValues) {
             $this->model = 'val_model';
-            $this->carSize = 'val_size';
+            $this->size = 'val_size';
             $this->color = 'val_color';
         }
     }
