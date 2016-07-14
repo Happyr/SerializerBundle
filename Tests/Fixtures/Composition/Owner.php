@@ -17,14 +17,14 @@ class Owner
      */
     private $car;
 
-    private $birtday;
+    private $birthday;
 
     public function __construct($withValues = false)
     {
         if ($withValues) {
             $this->name = 'Foobar';
             $this->car = new Car(true);
-            $this->birtday = new \DateTime('-21years');
+            $this->birthday = new \DateTime('-21years');
         }
     }
 

@@ -76,6 +76,10 @@ class MetadataAwareDenormalizer extends SerializerAwareNormalizer implements Den
      */
     private function setPropertyValue($object, array $meta, $propertyName, $value, array $context)
     {
+        if (!isset($meta['property'][$propertyName])) {
+            $meta['property'][$propertyName] = [];
+        }
+
         // Default exclusion policy is ALL
         $exclusionPolicy = isset($meta['class']['exclusion_policy']) ? $meta['class']['exclusion_policy'] : ExclusionPolicy::ALL;
 

@@ -70,6 +70,10 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
 
     protected function normalizeProperty(array &$normalizedData, array &$meta, $object, $propertyName, array $context)
     {
+        if (!isset($meta['property'][$propertyName])) {
+            $meta['property'][$propertyName] = [];
+        }
+
         // Default exclusion policy is ALL
         $exclusionPolicy = isset($meta['class']['exclusion_policy']) ? $meta['class']['exclusion_policy'] : ExclusionPolicy::ALL;
 
@@ -121,6 +125,10 @@ class MetadataAwareNormalizer extends SerializerAwareNormalizer implements Norma
 
     protected function normalizeMethod(array &$normalizedData, array &$meta, $object, $methodName, array $context)
     {
+        if (!isset($meta['method'][$methodName])) {
+            $meta['method'][$methodName] = [];
+        }
+
         // Methods are never serialized by default
         $included = false;
 

@@ -24,7 +24,7 @@ class CompositionTest extends SerializerTestCase
 
     public function testDeserialize()
     {
-        $data = json_decode('{"name":"Foobar","car":{"super_model":"val_model","car_size":"val_size","color":"val_color"},"birtday":"1995-07-14T20:07:41+02:00"}', true);
+        $data = json_decode('{"name":"Foobar","car":{"super_model":"val_model","car_size":"val_size","color":"val_color"},"birthday":"1995-07-14T20:07:41+02:00"}', true);
         $obj = $this->deserialize($data, Owner::class);
 
         $this->assertPropertyValue($obj, 'name', 'Foobar');
